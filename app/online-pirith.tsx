@@ -34,11 +34,11 @@ export default function OnlinePirithScreen() {
 
   uri: "https://raw.githubusercontent.com/RathnaSL/sadaham-app/main/assets/audio/atavisi-piritha.mp3",
 },
-{
-  title: "කරනීයමෙත්ත සූත්‍රය",
 
-  uri: "https://raw.githubusercontent.com/RathnaSL/sadaham-app/main/assets/audio/Karaniya-Meththa-Suthraya.mp3",
-},
+ 
+
+  
+
 
 
 
