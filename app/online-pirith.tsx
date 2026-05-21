@@ -14,46 +14,83 @@ export default function OnlinePirithScreen() {
 
   const onlineList = [
     {
-      title: "Online පිරිත් 1",
-      uri: "https://YOUR_MP3_LINK.mp3",
+      title: "මෝර පිරිත",
+      uri: "https://github.com/RathnaSL/sadaham-app/raw/refs/heads/main/assets/audio/-%20Mora%20Piritha.mp3",
     },
-
     {
-      title: "Online පිරිත් 2",
-      uri: "https://YOUR_MP3_LINK.mp3",
+      title: "බෝධි පූජා කවි",
+      uri: "https://raw.githubusercontent.com/RathnaSL/sadaham-app/main/assets/audio/bodhi-pooja-kavi.mp3",
     },
+    {
+      title: "මහා සතිපට්ඨාන සූත්‍රය",
+      uri: "https://raw.githubusercontent.com/RathnaSL/sadaham-app/main/assets/audio/maha-satipatthana-sutta.mp3",
+    },
+     {
+  title: " සීවලී පිරිත",
+  uri: "https://raw.githubusercontent.com/RathnaSL/sadaham-app/main/assets/audio/seevali-piritha.mp3",
+},
+  {
+  title: "අටවිසි පිරිත",
+
+  uri: "https://raw.githubusercontent.com/RathnaSL/sadaham-app/main/assets/audio/atavisi-piritha.mp3",
+},
+{
+  title: "කරනීයමෙත්ත සූත්‍රය",
+
+  uri: "https://raw.githubusercontent.com/RathnaSL/sadaham-app/main/assets/audio/Karaniya-Meththa-Suthraya.mp3",
+},
+
+
+
   ];
 
-  const playAudio = async (title: string, uri: string) => {
-    try {
-      if (soundRef.current) {
-        await soundRef.current.stopAsync();
-        await soundRef.current.unloadAsync();
-        soundRef.current = null;
+ const playAudio = async (title: string, uri: string) => {
+  try {
+    // paused audio continue කරන්න
+    if (soundRef.current && playing === title) {
+      const status = await soundRef.current.getStatusAsync();
+
+      if (status.isLoaded && status.isPlaying === false) {
+        await soundRef.current.playAsync();
+        return;
       }
-
-      const { sound } = await Audio.Sound.createAsync({
-        uri,
-      });
-
-      soundRef.current = sound;
-
-      setPlaying(title);
-
-      await sound.playAsync();
-    } catch (error) {
-      console.log(error);
     }
-  };
 
+    // old audio remove
+    if (soundRef.current) {
+      await soundRef.current.stopAsync();
+      await soundRef.current.unloadAsync();
+      soundRef.current = null;
+    }
+
+    const { sound } = await Audio.Sound.createAsync({ uri });
+
+    soundRef.current = sound;
+
+    setPlaying(title);
+
+    await sound.playAsync();
+  } catch (error) {
+    console.log(error);
+  }
+};
+const pauseAudio = async () => {
+  try {
+    if (soundRef.current) {
+      await soundRef.current.pauseAsync();
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
   const stopAudio = async () => {
     try {
       if (soundRef.current) {
         await soundRef.current.stopAsync();
+        await soundRef.current.setPositionAsync(0);
         await soundRef.current.unloadAsync();
         soundRef.current = null;
       }
-
       setPlaying("");
     } catch (error) {
       console.log(error);
@@ -61,37 +98,39 @@ export default function OnlinePirithScreen() {
   };
 
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.content}
-    >
+    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       <Text style={styles.title}>Online Pirith</Text>
 
       {onlineList.map((item, index) => (
         <View style={styles.card} key={index}>
           <Text style={styles.audioTitle}>{item.title}</Text>
 
-          <TouchableOpacity
-            style={styles.playButton}
-            onPress={() => playAudio(item.title, item.uri)}
-          >
-            <Text style={styles.buttonText}>Play Online</Text>
-          </TouchableOpacity>
+          <View style={styles.controlRow}>
+            <TouchableOpacity
+              style={[styles.controlButton, styles.playButton]}
+              onPress={() => playAudio(item.title, item.uri)}
+            >
+            
+              <Text style={styles.controlText}>Play</Text>
+            </TouchableOpacity>
+
+           <TouchableOpacity
+  style={[styles.controlButton, styles.pauseButton]}
+  onPress={pauseAudio}
+>
+  <Text style={styles.controlText}>Pause</Text>
+</TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.controlButton, styles.stopSmallButton]}
+              onPress={stopAudio}
+            >
+              <Text style={styles.controlText}>Stop</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       ))}
 
-      <TouchableOpacity
-        style={styles.stopButton}
-        onPress={stopAudio}
-      >
-        <Text style={styles.buttonText}>Stop Audio</Text>
-      </TouchableOpacity>
-
-      {playing ? (
-        <Text style={styles.playing}>
-          Playing: {playing}
-        </Text>
-      ) : null}
+      {playing ? <Text style={styles.playing}>Playing: {playing}</Text> : null}
     </ScrollView>
   );
 }
@@ -101,12 +140,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#FFFFFF",
   },
-
   content: {
     padding: 22,
     paddingBottom: 80,
   },
-
   title: {
     fontSize: 34,
     fontWeight: "900",
@@ -114,42 +151,42 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     color: "#C62828",
   },
-
   card: {
     backgroundColor: "#F3F6FA",
     borderRadius: 16,
     padding: 18,
-    marginBottom: 14,
+    marginBottom: 18,
   },
-
   audioTitle: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: "900",
     marginBottom: 16,
     color: "#111",
   },
-
+  controlRow: {
+    flexDirection: "row",
+    gap: 8,
+  },
+  controlButton: {
+    flex: 1,
+    paddingVertical: 14,
+    borderRadius: 12,
+    alignItems: "center",
+  },
   playButton: {
-    backgroundColor: "#1565C0",
-    paddingVertical: 15,
-    borderRadius: 12,
-    alignItems: "center",
+    backgroundColor: "#2E7D32",
   },
-
-  stopButton: {
-    backgroundColor: "#9E9E9E",
-    paddingVertical: 16,
-    borderRadius: 12,
-    alignItems: "center",
-    marginTop: 12,
+  pauseButton: {
+    backgroundColor: "#F9A825",
   },
-
-  buttonText: {
+  stopSmallButton: {
+    backgroundColor: "#C62828",
+  },
+  controlText: {
     color: "#FFF",
-    fontSize: 22,
+    fontSize: 16,
     fontWeight: "900",
   },
-
   playing: {
     marginTop: 16,
     fontSize: 18,

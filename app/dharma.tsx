@@ -12,7 +12,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { WebView } from 'react-native-webview';
-
+import { Linking } from "react-native";
 type VideoItem = {
   title: string;
   id: string;
@@ -73,16 +73,19 @@ export default function DharmaScreen() {
     <SafeAreaView style={styles.safe}>
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         <Text
+        
   style={{
     fontFamily: "Basuru",
     fontSize: 40,
     color: "#e61010", 
     textAlign: "center",
   }}
+  
 >
    O¾ufoaYkd
+   
 </Text>
-
+      
         <View style={styles.searchBox}>
           <TextInput
             style={styles.input}
@@ -149,46 +152,75 @@ export default function DharmaScreen() {
         <SafeAreaView style={styles.modalSafe}>
           <View style={styles.modalHeader}>
             <Text style={styles.modalTitle}>{selectedVideo?.title}</Text>
-
+ 
             <TouchableOpacity style={styles.closeButton} onPress={() => setSelectedVideo(null)}>
               <Text style={styles.closeText}>වසන්න</Text>
             </TouchableOpacity>
           </View>
 
-          {selectedVideo && (
-            <WebView
-              style={styles.webview}
-              javaScriptEnabled
-              domStorageEnabled
-              allowsFullscreenVideo
-              startInLoadingState
-              renderLoading={() => (
-                <View style={styles.videoLoadingBox}>
-                  <Text style={styles.videoLoadingText}>වීඩියෝව load වෙමින්...</Text>
-                </View>
-              )}
-              source={{
-                uri: `${API_BASE}/youtube.html?v=${selectedVideo.id}`,
-              }}
-            />
-          )}
-        </SafeAreaView>
-      </Modal>
-    </SafeAreaView>
-  );
+        {selectedVideo && (
+  <TouchableOpacity
+  style={styles.watchButton}
+  onPress={() =>
+    Linking.openURL(`https://www.youtube.com/watch?v=${selectedVideo.id}`)
+  }
+>
+  <Text style={styles.watchButtonText}>
+    Fullscreen Open
+  </Text>
+</TouchableOpacity>
+  
+)}
+</SafeAreaView>
+</Modal>
+</SafeAreaView>
+);
 }
 
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: '#FFFFFF' },
-  container: { flex: 1, backgroundColor: '#FFFFFF' },
-  content: { paddingHorizontal: 20, paddingTop: 25, paddingBottom: 40 },
+  safe: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+  },
+watchButton: {
+  backgroundColor: "#d32f2f",
+  paddingVertical: 16,
+  borderRadius: 12,
+  alignItems: "center",
+  marginTop: 20,
+},
+
+watchButtonText: {
+  color: "#fff",
+  fontSize: 20,
+  fontWeight: "bold",
+},
+  container: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+    paddingTop: 25,
+    paddingBottom: 40,
+  },
+
+  video: {
+    width: "100%",
+    height: 250,
+    backgroundColor: "#000",
+  },
+  video: {
+  width: "100%",
+  height: 250,
+  backgroundColor: "#000",
+},
   title: {
     fontSize: 32,
-    fontWeight: 'bold',
+    fontWeight: 'bold', 
     color: "#e61010", 
     textAlign: 'center',
     marginBottom: 22,
     fontFamily: "Basuru"
+
+    
   },
   searchBox: {
     backgroundColor: '#F4F8F6',
