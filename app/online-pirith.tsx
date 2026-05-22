@@ -13,10 +13,7 @@ export default function OnlinePirithScreen() {
   const [playing, setPlaying] = useState("");
 
   const onlineList = [
-    {
-      title: "මෝර පිරිත",
-      uri: "https://github.com/RathnaSL/sadaham-app/raw/refs/heads/main/assets/audio/-%20Mora%20Piritha.mp3",
-    },
+   
     {
       title: "බෝධි පූජා කවි",
       uri: "https://raw.githubusercontent.com/RathnaSL/sadaham-app/main/assets/audio/bodhi-pooja-kavi.mp3",
@@ -35,12 +32,47 @@ export default function OnlinePirithScreen() {
   uri: "https://raw.githubusercontent.com/RathnaSL/sadaham-app/main/assets/audio/atavisi-piritha.mp3",
 },
 
- 
-
+ {
+  title:"මහා මංගල සූත්‍රය", 
+  uri: "https://raw.githubusercontent.com/RathnaSL/sadaham-app/main/assets/audio/mhamangala-sutraya.mp3",
+},
+{
+  title:"කරනීයමෙත්ත සූත්‍රය", 
+  uri: "https://raw.githubusercontent.com/RathnaSL/sadaham-app/main/assets/audio/Karaniya-Meththa-Suthraya.mp3",
+},
   
+ {
+      title: "මෝර පිරිත",
+      uri: "https://github.com/RathnaSL/sadaham-app/raw/refs/heads/main/assets/audio/-%20Mora%20Piritha.mp3",
+    },
 
+{
+  title:"ධජග්ග සූත්‍රය", 
+  uri: "https://raw.githubusercontent.com/RathnaSL/sadaham-app/main/assets/audio/Dhajagga-Sutraya.mp3",
 
+},
 
+{
+  title:"ඇනවුමි පිරිත", 
+  uri: "https://raw.githubusercontent.com/RathnaSL/sadaham-app/main/assets/audio/Anawum-Piritha.mp3",
+
+},
+{
+  title:"ජලනන්දන පිරිත", 
+  uri: "https://raw.githubusercontent.com/RathnaSL/sadaham-app/main/assets/audio/jalanandana-piritha.mp3",
+
+},
+
+{
+  title:"ජිනපංජර පිරිත", 
+  uri: "https://raw.githubusercontent.com/RathnaSL/sadaham-app/main/assets/audio/Jinapanjnara-Piritha.mp3",
+
+},
+{
+  title:"දස දිසා පිරිත", 
+  uri: "https://raw.githubusercontent.com/RathnaSL/sadaham-app/main/assets/audio/Dasa-Disa-Piritha.mp3",
+
+},
 
   ];
 

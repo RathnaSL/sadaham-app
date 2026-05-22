@@ -19,15 +19,15 @@ export default function AboutScreen() {
       <Text style={styles.description}>
 
         <Text style={styles.description}>
-        K H ජෝන් සමරසේකර මහතාට සහ
+        කේ.එචි. ජෝන් සමරසේකර  සහ
           කුසුමා ජයනෙත්ති ආරච්චි
-          මවුපියන් දෙපල සහ මියගිය සියලු
-          නැ හිතමිතුරු ආදීන්ට පිංපිණිස
+          මවුපියන් දෙපල{"\n\n"} සහ{"\n\n"} මියගිය සියලුම
+          නැදෑ හිතමිතුරු ආදීන්ට පිංපිණිස
           {"\n\n"}
-          රේණුකා දමයන්ති සමරසේකර සහ
-          රත්න සමරසේකර {"\n\n"}
+          රේණුකා දමයන්ති සමරසේකර {"\n\n"}
+          රත්න සමරසේකර{"\n\n"} 
           යන දූ දරුවන් වන්
-          විසින්
+          විසින්{"\n\n"}
            බෞද්ධ
           සැදැහැවතුන් වෙත සැදැහැසිතින්
           පිරිනමන වගයි.
@@ -51,7 +51,7 @@ export default function AboutScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 10,
+    flexGrow: 30,
     alignItems: "center",
     justifyContent: "center",
     padding: 15,
@@ -66,14 +66,14 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    width: 380,
-    height: 380,
-    marginBottom: -100,
+    width: 480,
+    height: 480,
+    marginBottom:-150,
   },
 
   version: {
     fontSize: 20,
-    fontWeight: "500",
+    fontWeight: "900",
     color: "#6A1B9A",
     marginBottom: 2,
   },
@@ -82,19 +82,19 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: "bold",
     color: "#1565C0",
-    marginBottom: 10,
+    marginBottom:10,
   },
 
   description: {
-    fontSize: 12,
+    fontSize: 15,
     textAlign: "center",
     lineHeight: 20,
     color: "#333",
-    marginBottom: 50,
+    marginBottom: 0,
   },
 
   footer: {
-    fontSize: 15,
+    fontSize: 18,
     color: "#777",
   },
 });

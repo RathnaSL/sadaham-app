@@ -10,6 +10,7 @@ export default function PirithAudioScreen() {
     { title: "රතන සූත්‍රය", file: require("../assets/audio/rathana-suthraya.mp3") },
     { title: "තෙරුවන් වන්දනාව", file: require("../assets/audio/theruwan-wandanawa.mp3") },
     { title: "ජයමංගල ගාථා", file: require("../assets/audio/jayamangala-gatha.mp3") },
+    
   ];
 
   const playAudio = async (title: string, file: any) => {

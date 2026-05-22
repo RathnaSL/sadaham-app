@@ -68,11 +68,23 @@ export default function AssistantScreen() {
       const res = await fetch(`${API_BASE_URL}/api/ai/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          question: q,
-          history: updatedMessages.slice(-10),
-          answerMode: getAnswerMode(q),
-        }),
+      body: JSON.stringify({
+  question: `
+ඔබ බෞද්ධ AI සහායකයෙකි.
+පරිශීලකයා අසන ප්‍රශ්න වලට
+දිග, පැහැදිලි, කරුණු සහිත,
+බෞද්ධ උදාහරණ සහිත
+පිළිතුරු ලබාදෙන්න.
+
+අවම වශයෙන් වාක්‍ය 10-15ක් ලියන්න.
+
+ප්‍රශ්නය:
+${q}
+`,
+  history: updatedMessages.slice(-10),
+  answerMode: getAnswerMode(q),
+}),
+       
       });
 
       let data: any = null;
@@ -126,15 +138,7 @@ export default function AssistantScreen() {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       keyboardVerticalOffset={Platform.OS === "ios" ? 90 : 20}
     >
-      <Text  style={{
-    fontFamily: "Basuru",
-    fontSize: 45,
-    color: "#e61010", 
-    textAlign: "center",
-  }}
->
-  O¾u iydhl
-</Text>
+     <Text style={styles.basuruTitle}>O¾u iydhl</Text>
 
       <ScrollView
         ref={scrollRef}
@@ -213,20 +217,29 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 30,
     paddingBottom: 35,
+    
+  },
+basuruTitle: {
+  fontFamily: "Basuru",
+  fontSize: 45,
+  color: "#d32f2f",
+  textAlign: "center",
+  marginBottom: 20,
 
+},
+ title: {
+  fontSize: 42,
+  color: "#d32f2f",
+  textAlign: "center",
+  marginBottom: 20,
+  fontFamily: "Basuru",
   },
-  title: {
-    fontSize: 28,
-    fontWeight: "bold",
-    color: "#000",
-    marginBottom: 16,
-    textAlign: "center",
-  },
-  chatBox: {
+  chatBox: { 
     flex: 1,
     backgroundColor: "#F2F2F2",
     marginBottom: 14,
     borderRadius: 12,
+    
   },
   chatContent: {
     padding: 12,
@@ -239,20 +252,25 @@ const styles = StyleSheet.create({
     marginTop: 30,
     lineHeight: 28,
   },
-  messageBubble: {
-    padding: 12,
-    marginBottom: 14,
-    borderRadius: 12,
-  },
-  userBubble: {
-    backgroundColor: "#DDEBFF",
-    alignSelf: "flex-end",
-    maxWidth: "85%",
-  },
-  aiBubble: {
-    backgroundColor: "#FFFFFF", 
-    alignSelf: "flex-start",
-    maxWidth: "95%",
+ 
+   messageBubble: {
+  padding: 16,
+  marginBottom: 14,
+  borderRadius: 16,
+  width: "100%",
+},
+
+userBubble: {
+  backgroundColor: "#DDEBFF",
+  alignSelf: "flex-end",
+  maxWidth: "100%",
+},
+
+aiBubble: {
+  backgroundColor: "#FFFFFF",
+  alignSelf: "flex-start",
+  maxWidth: "100%",
+
   },
   messageLabel: {
     fontSize: 15,
@@ -261,15 +279,18 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   messageText: {
-    fontSize: 16,
-    color: "#333",
-    lineHeight: 27,
+  fontSize: 20,
+  color: "#333",
+  lineHeight: 34,
+  
+  textAlign: "left",
+  width: "100%",
   },
   loadingText: {
     marginTop: 8,
     fontSize: 16,
     color: "#666",
-  },
+  }, 
   input: {
   width: "100%",
   minHeight: 60,
@@ -307,6 +328,7 @@ const styles = StyleSheet.create({
   alignItems: "center",
   marginBottom: 45,
   borderRadius: 12,
+  
 
   },
   clearButtonText: {
@@ -317,4 +339,23 @@ const styles = StyleSheet.create({
   disabledButton: {
     opacity: 0.6,
   },
+responseText: {
+  fontSize: 20,
+  lineHeight: 34,
+  color: "#222",
+  textAlign: "left",
+  width: "100%",
+  fontFamily: undefined,
+  fontWeight: "normal",
+
+
+},
+responseBox: {
+  width: "100%",
+  backgroundColor: "#f5f5f5",
+  borderRadius: 20,
+  padding: 14,
+  alignSelf: "center",
+},
+
 });
